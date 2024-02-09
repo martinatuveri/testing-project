@@ -1,4 +1,4 @@
-import { Intestatario, newOrder } from './ordine';
+import { Intestatario, newOrder } from './newOrder';
 
 describe('newOrder', () => {
   // Happy Path
