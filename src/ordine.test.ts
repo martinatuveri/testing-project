@@ -1,10 +1,10 @@
-import { newOrder } from './ordine';
+import { Intestatario, newOrder } from './ordine';
 
 describe('newOrder', () => {
   // Happy Path
   it('should create a new order for a valid customer', () => {
     const intestatario = {
-      codiceFiscale: 'ABC123',
+      codiceFiscale: 'TVRMTN02D205V52F',
       nome: 'Mario',
       cognome: 'Rossi',
       email: 'mario.rossi@example.com',
@@ -12,7 +12,7 @@ describe('newOrder', () => {
 
     const ordine = newOrder(intestatario);
 
-    expect(ordine).toBe({
+    expect(ordine).toEqual({
       intestatario,
       giftCards: [],
     });
@@ -21,7 +21,7 @@ describe('newOrder', () => {
   // Special Cases
   it('should create an order even if some optional customer details are missing', () => {
     const intestatario = {
-      codiceFiscale: 'ABC123',
+      codiceFiscale: 'TVRMTN02D205V52F',
       nome: 'Mario',
       cognome: 'Rossi',
       email: 'mario.rossi@example.com'
@@ -29,14 +29,14 @@ describe('newOrder', () => {
 
     const ordine = newOrder(intestatario);
 
-    expect(ordine.intestatario).toBe(intestatario);
-    expect(ordine.giftCards).toBe([]);
+    expect(ordine.intestatario).toEqual(intestatario);
+    expect(ordine.giftCards).toEqual([]);
   });
 
   // Edge Cases
   it('should handle edge case with minimum input', () => {
     const intestatario = {
-      codiceFiscale: 'ABC123',
+      codiceFiscale: 'TVRMTN02D205V52F',
       nome: 'Mario',
       cognome: 'Rossi',
       email: 'mario.rossi@example.com'
@@ -44,18 +44,18 @@ describe('newOrder', () => {
 
     const ordine = newOrder(intestatario);
 
-    expect(ordine.intestatario).toBe(intestatario);
-    expect(ordine.giftCards).toBe([]);
+    expect(ordine.intestatario).toEqual(intestatario);
+    expect(ordine.giftCards).toEqual([]);
   });
 
   // Eccezioni
   it('should throw an error for an invalid customer (missing required fields)', () => {
     const intestatario = {
-      codiceFiscale: 'ABC123',
+      codiceFiscale: '',
       nome: 'Mario',
       cognome: 'Rossi',
       email: 'mario.rossi@example.com'
-    };
+    } as unknown as Intestatario;
 
     expect(() => newOrder(intestatario)).toThrow('Invalid customer data');
   });
