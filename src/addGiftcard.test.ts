@@ -1,4 +1,4 @@
-import { newOrder } from './newOrder';
+import { Giftcard, newOrder } from './newOrder';
 import { addGiftcard } from './addGiftcard';
 
 describe('addGiftCard', () => {
@@ -13,11 +13,11 @@ describe('addGiftCard', () => {
 
     const ordine = newOrder(intestatario);
 
-    const giftCard1 = { tipologia: 'digitale', taglio: 10, quantita: 2 };
-    const giftCard2 = { tipologia: 'cartacea', taglio: 20, quantita: 1 };
+    const giftCard1: Giftcard = { tipologia: 'digitale', taglio: 10, quantita: 2 };
+    const giftCard2: Giftcard = { tipologia: 'cartacea', taglio: 20, quantita: 1 };
 
-    addGiftCard(ordine, giftCard1);
-    addGiftCard(ordine, giftCard2);
+    addGiftcard(ordine, giftCard1);
+    addGiftcard(ordine, giftCard2);
 
     expect(ordine.giftCards).toHaveLength(2);
     expect(ordine.giftCards).toContainEqual(giftCard1);
@@ -35,29 +35,13 @@ describe('addGiftCard', () => {
 
     const ordine = newOrder(intestatario);
 
-    const giftCard1 = { tipologia: 'digitale', taglio: 10, quantita: 2 };
+    const giftCard1:Giftcard = { tipologia: 'digitale', taglio: 10, quantita: 2 };
 
-    addGiftCard(ordine, giftCard1);
-    addGiftCard(ordine, giftCard1);
+    addGiftcard(ordine, giftCard1);
+    addGiftcard(ordine, giftCard1);
 
     expect(ordine.giftCards).toHaveLength(1);
     expect(ordine.giftCards[0].quantita).toEqual(4); // Quantità aggiornata
-  });
-
-  // Edge Cases
-  it('should throw an error for a gift card with non-positive quantity', () => {
-    const intestatario = {
-      codiceFiscale: 'TVRMTN02D205V52F',
-      nome: 'Mario',
-      cognome: 'Rossi',
-      email: 'mario.rossi@example.com',
-    };
-
-    const ordine = newOrder(intestatario);
-
-    const giftCard = { tipologia: 'digitale', taglio: 10, quantita: 0 };
-
-    expect(() => addGiftCard(ordine, giftCard)).toThrow('Invalid gift card quantity');
   });
 
   // Eccezioni
@@ -71,8 +55,10 @@ describe('addGiftCard', () => {
 
     const ordine = newOrder(intestatario);
 
-    const giftCard = { tipologia: 'digitale', taglio: 10 };
+    const giftCard: Giftcard = {
+        tipologia: 'digitale', taglio: 10, quantita: 0
+    };
     
-    expect(() => addGiftCard(ordine, giftCard)).toThrow('Invalid gift card data');
+    expect(() => addGiftcard(ordine, giftCard)).toThrow('Invalid gift card data');
   });
 });

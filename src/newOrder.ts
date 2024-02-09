@@ -5,15 +5,15 @@ export interface Intestatario {
     email?: string;
   }
   
-interface GiftCard {
+export interface Giftcard {
     tipologia: 'digitale' | 'cartacea';
     taglio: 10 | 20 | 50 | 100;
     quantita: number;
   }
   
-interface Ordine {
+export interface Ordine {
     intestatario: Intestatario;
-    giftCards: GiftCard[];
+    giftCards: Giftcard[];
   }
   
   export function newOrder(intestatario: Intestatario): Ordine {

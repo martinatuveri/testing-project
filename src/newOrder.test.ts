@@ -34,7 +34,7 @@ describe('newOrder', () => {
   });
 
   // Edge Cases
-  it('should handle edge case with minimum input', () => {
+  it('edge case with minimum input', () => {
     const intestatario = {
       codiceFiscale: 'TVRMTN02D205V52F',
       nome: 'Mario',
@@ -49,7 +49,7 @@ describe('newOrder', () => {
   });
 
   // Eccezioni
-  it('should throw an error for an invalid customer (missing required fields)', () => {
+  it(' invalid customer (missing required fields)', () => {
     const intestatario = {
       codiceFiscale: '',
       nome: 'Mario',
